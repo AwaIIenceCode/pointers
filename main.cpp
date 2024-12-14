@@ -4,33 +4,25 @@ using namespace std;
 
 int main()
 {
-    int *p_user_number = new int;
+    int *p_1 = new int;
+    int *p_2 = new int;
+    int *p_temp = new int;
 
-    cout << "Enter the number -> ";
-    cin >> *p_user_number;
+    cout << "Enter the first number -> ";
+    cin >> *p_1;
 
-    if (!cin)
-    {
-        cout << "Invalid input. Please enter a number!" << endl;
-        delete p_user_number;
-        return 1;
-    }
+    cout << "Enter the second number -> ";
+    cin >> *p_2;
 
-    if (*p_user_number > 0)
-    {
-        cout << "Number " << *p_user_number << " is positive" << endl;
-    }
+    *p_temp = *p_1;
+    *p_1 = *p_2;
+    *p_2 = *p_temp;
 
-    else if (*p_user_number < 0)
-    {
-        cout << "Number " << *p_user_number << " is negative" << endl;
-    }
+    cout << "\nNow your first number has become -> " << *p_1 << endl;
+    cout << "Now your second number has become -> " << *p_2 << endl;
 
-    else
-    {
-        cout << " Number is equal zero" << endl;
-    }
-
-    delete p_user_number;
+    delete p_1;
+    delete p_2;
+    delete p_temp;
     return 0;
 }

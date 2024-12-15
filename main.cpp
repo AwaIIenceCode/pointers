@@ -1,73 +1,40 @@
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
-    double *p_user_number_1 = new double;
-    double *p_user_number_2 = new double;
-    int *choice = new int;
+    srand(time(NULL));
 
-    cout << "Enter the first number -> ";
-    cin >> *p_user_number_1;
+    int SIZE;
+    int *sum_elements = new int(0);
 
-    cout << "Enter the second number -> ";
-    cin >> *p_user_number_2;
+    cout << "Enter the size of the array -> ";
+    cin >> SIZE;
 
-    cout << "Enter \"1\" for sum\nEnter \"2\" for subtraction\nEnter \"3\" for division\nEnter \"4\" for multiplication" << endl;
-    cin >> *choice;
-
-    if(!cin)
+    if (SIZE <= 0)
     {
-        cout << "Invalid input. Please enter a number!" << endl;
-        delete p_user_number_1;
-        delete p_user_number_2;
-        delete choice;
+        cout << "Invalid array size!" << endl;
         return 1;
     }
 
-    switch (*choice)
+    int *arr = new int[SIZE];
+
+    cout << "Your array [  ";
+
+    for (int *ptr = arr; ptr < arr + SIZE; ptr++)
     {
-        case 1:
-        {
-            cout << *p_user_number_1 + *p_user_number_2;
-            break;
-        }
-
-        case 2:
-        {
-            cout << *p_user_number_1 - *p_user_number_2;
-            break;
-        }
-
-        case 3:
-        {
-            if (*p_user_number_2 == 0)
-            {
-                cout << "Error: Division by zero!" << endl;
-            }
-
-            else
-            {
-                cout << *p_user_number_1 / *p_user_number_2;
-            }
-            break;
-        }
-
-        case 4:
-        {
-            cout << *p_user_number_1 * *p_user_number_2;
-            break;
-        }
-
-        default:
-        {
-            cout << "Invalid input. Please enter a number 1 - 4" << endl;
-        }
+        *ptr = rand() % 10;
+        *sum_elements += *ptr;
+        cout << *ptr << "  ";
     }
 
-    delete p_user_number_1;
-    delete p_user_number_2;
-    delete choice;
+    cout << "]" << endl;
+    cout << "Sum elements in your array = " << *sum_elements << endl;
+
+    delete sum_elements;
+    delete [] arr;
+
     return 0;
 }

@@ -1,9 +1,9 @@
 #include <iostream>
 #include <ctime>
 #include <thread>
-#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 int main()
 {
@@ -11,7 +11,7 @@ int main()
 
     int SIZE;
 
-    cout << "Enter the size of the array -> ";
+    cout << "Enter the size of your array -> ";
     cin >> SIZE;
 
     if (!cin || SIZE <= 0)
@@ -20,35 +20,42 @@ int main()
         return 1;
     }
 
-    int *arr_1 = new int[SIZE];
-    int *arr_2 = new int[SIZE];
+    int *first_arr = new int[SIZE];
 
-    cout << "Your first array: [   ";
-
-    for (int *ptr = arr_1; ptr < arr_1 + SIZE; ptr++)
+    for (int *p_i = first_arr; p_i < first_arr + SIZE; p_i++)
     {
-        *ptr = rand() % 20 - 10;
-        cout << *ptr << "   ";
+        cout << "Enter the " << (p_i - first_arr + 1) << " element of your array -> ";
+        cin >> *p_i;
+        cout << endl;
+    }
+
+    cout << "Your first array [  ";
+
+    for (int *p_i = first_arr; p_i < first_arr + SIZE; p_i++)
+    {
+        cout << *p_i << "  ";
     }
 
     cout << "]" << endl;
 
-    cout << "\nCopying first array to the second array...\n" << endl;
-    this_thread::sleep_for(chrono::seconds(2));
+    cout << "Your reversed array [  ";
 
-
-    cout << "Your second array: [   ";
-
-    for (int *first_ptr = arr_1, *second_ptr = arr_2; second_ptr < arr_2 + SIZE; first_ptr++, second_ptr++)
+    for (int *p_i = first_arr + SIZE - 1; p_i >= first_arr; p_i--)
     {
-        *second_ptr = *first_ptr;
-        cout << *second_ptr << "   ";
+        cout << *p_i << "  ";
+        this_thread::sleep_for(seconds(1));
     }
 
     cout << "]" << endl;
 
-    delete[] arr_1;
-    delete[] arr_2;
+    delete[] first_arr;
 
     return 0;
 }
+
+/*for (int *p_start = first_arr, *p_end = first_arr + SIZE - 1; p_start < p_end; p_start++, p_end--)
+{
+int temp = *p_start;
+*p_start = *p_end;
+*p_end = temp;
+}*/
